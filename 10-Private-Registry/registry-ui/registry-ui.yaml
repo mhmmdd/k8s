@@ -1,0 +1,37 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: docker-registry-ui
+  namespace: container-registry
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`registry-ui.k8s-example.com`)
+      services:
+        - name: docker-registry-ui-ui # Suffix added by the Helm chart
+          port: 80
+          passHostHeader: true
+          namespace: container-registry
+    - kind: Rule
+      match: Host(`registry-ui.k8s-example.com`) && PathPrefix(`/v2`)
+      services:
+        - name: docker-registry-ui-ui # Suffix added by the Helm chart
+          port: 443
+          passHostHeader: true
+          namespace: container-registry
+      middlewares:
+        - name: docker-registry-ui-v2-auth
+          namespace: container-registry
+  tls:
+    secretName: k8s-example-com-cert-secret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: docker-registry-ui-v2-auth
+  namespace: container-registry
+spec:
+  basicAuth:
+    secret: docker-registry-ui-secret

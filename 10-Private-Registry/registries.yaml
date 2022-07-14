@@ -1,0 +1,13 @@
+mirrors:
+  \"registry.k8s-example.com\":
+    endpoint:
+      - \"https://registry.k8s-example.com\"
+configs:
+  \"registry.k8s-example.com\":
+    auth:
+      username: admin
+      password: 123
+    tls:
+      cert_file: /tmp/container-registry/cert-secrets/cert_file.crt
+      key_file: /tmp/container-registry/cert-secrets/key_file.key
+      ca_file: /tmp/container-registry/cert-secrets/ca_file.crt
