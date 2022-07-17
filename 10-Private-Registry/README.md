@@ -158,11 +158,5 @@ docker login \
    -p $(cat $HOME/temp/registry-creds/registry-pass.txt) \
    https://registry.k8s-example.com
 ```
-
-## 
-```shell
-```
-
-## 
-```shell
-```
+## Use custom tls/ssl [here](certbot/README.md)
+## Create an example app with using generated tls/ssl [here](hello-app/README.md)

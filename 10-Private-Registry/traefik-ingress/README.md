@@ -1,5 +1,5 @@
 source: https://blog.zachinachshon.com/traefik-ingress/
-## Install traefik
+## Install Traefik
 ```shell
 $ kubectl create namespace traefik
 $ helm repo add traefik https://helm.traefik.io/traefik
@@ -21,10 +21,10 @@ $ helm upgrade --install traefik \
 ## Verify installation
 ```shell
 # Make sure all traefik deployed pods are running
-kubectl get pods --namespace traefik
+$ kubectl get pods --namespace traefik
 
 # Make sure custom resources *.traefik.containo.us were created successfully
-kubectl get crd | grep traefik
+$ kubectl get crd | grep traefik
 ```
 
 ## Copy secret to traefik namespace
@@ -88,8 +88,8 @@ $ echo -e "172.16.16.102\ttraefik.k8s-example.com" | sudo tee -a /etc/hosts
 ## Uninstall
 ```shell
 # 1. Remove traefik from the cluster
-helm uninstall traefik --namespace traefik
+$ helm uninstall traefik --namespace traefik
    
 # 2. Clear the traefik namespace
-kubectl delete namespaces traefik
+$ kubectl delete namespaces traefik
 ```
